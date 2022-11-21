@@ -6,9 +6,9 @@ import sys
 from tnparser.pipeline import Pipeline, read_pipelines
 
 app=flask.Flask(__name__)
-model=os.environ.get("TNPP_MODEL","models_fi_tdt/pipelines.yaml")
+model=os.environ.get("TNPP_MODEL","models_fi_tdt_dia/pipelines.yaml")
 pipeline=os.environ.get("TNPP_PIPELINE","parse_plaintext")
-max_char=int(os.environ.get("TNPP_MAX_CHARS",15000))
+max_char=int(os.environ.get("TNPP_MAX_CHARS",1500000))
 available_pipelines=read_pipelines(model)
 p=Pipeline(available_pipelines[pipeline])
              
@@ -34,3 +34,6 @@ def parse_post():
     return flask.Response(res,mimetype="text/plain; charset=utf-8")
 
 
+def start_app():
+    global app
+    return app
